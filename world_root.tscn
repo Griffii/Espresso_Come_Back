@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=4 uid="uid://cdb0rjnpcsmns"]
+[gd_scene load_steps=12 format=4 uid="uid://cdb0rjnpcsmns"]
 
 [ext_resource type="Texture2D" uid="uid://6raotvj2uwi0" path="res://Assets/sprites/School_TileSet_01.png" id="1_hywmd"]
 [ext_resource type="PackedScene" uid="uid://rf4og1j5y2us" path="res://Scenes/player_01.tscn" id="1_nnf5p"]
 [ext_resource type="PackedScene" uid="uid://c880bkl4ifdve" path="res://Scenes/cat_01.tscn" id="3_x1671"]
-[ext_resource type="PackedScene" uid="uid://ciytfg4jk7kbv" path="res://Scenes/chair.tscn" id="5_mn7n6"]
 [ext_resource type="PackedScene" uid="uid://yojnx26tsp6r" path="res://Scenes/wall_clock.tscn" id="5_paa2c"]
-[ext_resource type="PackedScene" uid="uid://chsaijqm7l1ib" path="res://Scenes/desk.tscn" id="6_ivg1t"]
 [ext_resource type="Texture2D" uid="uid://b31aqoouysyx6" path="res://Assets/sprites/broom01.png" id="7_ae2qc"]
 [ext_resource type="Texture2D" uid="uid://uaks4r3d2nuk" path="res://Assets/sprites/bookstack01.png" id="8_hhu63"]
 [ext_resource type="Texture2D" uid="uid://cc5mw6sef2hnm" path="res://Assets/sprites/LilBlueBook01.png" id="9_8vtvg"]
@@ -166,54 +164,6 @@ position_smoothing_enabled = true
 
 [node name="clock" parent="." instance=ExtResource("5_paa2c")]
 position = Vector2(95, -68)
-
-[node name="chair" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(115, 38)
-
-[node name="chair2" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(-1, 39)
-
-[node name="chair3" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(45, 34)
-
-[node name="chair4" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(172, 37)
-
-[node name="desk" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(170, 44)
-
-[node name="desk2" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(115, 44)
-
-[node name="desk3" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(57, 44)
-
-[node name="desk4" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(-1, 44)
-
-[node name="chair5" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(115, 0)
-
-[node name="chair6" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(0, -4)
-
-[node name="chair7" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(59, -5)
-
-[node name="chair8" parent="." instance=ExtResource("5_mn7n6")]
-position = Vector2(172, -12)
-
-[node name="desk5" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(171, 5)
-
-[node name="desk6" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(116, 5)
-
-[node name="desk7" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(58, 5)
-
-[node name="desk8" parent="." instance=ExtResource("6_ivg1t")]
-position = Vector2(0, 5)
 
 [node name="Broom01" type="Sprite2D" parent="."]
 position = Vector2(213, -18)

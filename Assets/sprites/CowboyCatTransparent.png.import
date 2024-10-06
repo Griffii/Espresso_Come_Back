@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5tm3he2q0ld"
-path="res://.godot/imported/world_tileset.png-7d0351459d02dec97d7c98fe9a06c85b.ctex"
+uid="uid://bmmarqh85qh48"
+path="res://.godot/imported/CowboyCatTransparent.png-a7ba98821e2c327b8f2539caf78a62a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world_tileset.png"
-dest_files=["res://.godot/imported/world_tileset.png-7d0351459d02dec97d7c98fe9a06c85b.ctex"]
+source_file="res://Assets/sprites/CowboyCatTransparent.png"
+dest_files=["res://.godot/imported/CowboyCatTransparent.png-a7ba98821e2c327b8f2539caf78a62a3.ctex"]
 
 [params]
 

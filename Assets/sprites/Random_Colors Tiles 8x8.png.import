@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cveuedmjh2dh5"
-path="res://.godot/imported/CowboyCatTransparent.png-8c19981d53f6e15ac7f077d9b1ec98a2.ctex"
+uid="uid://c5nhj25fplxoo"
+path="res://.godot/imported/Random_Colors Tiles 8x8.png-57e382ae69c36d0d929c1cbda256a2c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CowboyCatTransparent.png"
-dest_files=["res://.godot/imported/CowboyCatTransparent.png-8c19981d53f6e15ac7f077d9b1ec98a2.ctex"]
+source_file="res://Assets/sprites/Random_Colors Tiles 8x8.png"
+dest_files=["res://.godot/imported/Random_Colors Tiles 8x8.png-57e382ae69c36d0d929c1cbda256a2c4.ctex"]
 
 [params]
 

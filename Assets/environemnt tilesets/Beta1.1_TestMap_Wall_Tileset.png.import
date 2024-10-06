@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6raotvj2uwi0"
-path="res://.godot/imported/School_TileSet_01.png-c7b06acb315b2fab0fe1da7cd43b24f8.ctex"
+uid="uid://cy0gerav6he4m"
+path="res://.godot/imported/Beta1.1_TestMap_Wall_Tileset.png-4bce822b5180461cb670faf85473bea4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/School_TileSet_01.png"
-dest_files=["res://.godot/imported/School_TileSet_01.png-c7b06acb315b2fab0fe1da7cd43b24f8.ctex"]
+source_file="res://Assets/environemnt tilesets/Beta1.1_TestMap_Wall_Tileset.png"
+dest_files=["res://.godot/imported/Beta1.1_TestMap_Wall_Tileset.png-4bce822b5180461cb670faf85473bea4.ctex"]
 
 [params]
 

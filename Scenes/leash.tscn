@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://brp74361h6mif"]
+
+[node name="Leash" type="Node2D"]
+
+[node name="Rope" type="Sprite2D" parent="."]
+
+[node name="Loop" type="CharacterBody2D" parent="."]
+
+[node name="LoopSprite" type="Sprite2D" parent="Loop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Loop/LoopSprite"]

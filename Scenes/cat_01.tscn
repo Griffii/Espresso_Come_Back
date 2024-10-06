@@ -1,6 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c880bkl4ifdve"]
+[gd_scene load_steps=20 format=3 uid="uid://c880bkl4ifdve"]
 
 [ext_resource type="Texture2D" uid="uid://5313cdycwtby" path="res://Assets/sprites/Cat01_SpriteTileSet.png" id="1_1owho"]
+[ext_resource type="Script" path="res://Scripts/cat_01.gd" id="1_8yvv5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5km6o"]
+radius = 77.5758
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_417i4"]
 atlas = ExtResource("1_1owho")
@@ -143,10 +147,13 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5km6o"]
-radius = 77.5758
-
 [node name="Cat01" type="CharacterBody2D"]
+script = ExtResource("1_8yvv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, -7)
+scale = Vector2(0.0644531, 0.0644531)
+shape = SubResource("CircleShape2D_5km6o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8.75, -8.75)
@@ -154,9 +161,5 @@ scale = Vector2(0.0644531, 0.0644531)
 sprite_frames = SubResource("SpriteFrames_pif0m")
 animation = &"idle01"
 autoplay = "idle01"
-frame_progress = 0.00235258
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7, -7)
-scale = Vector2(0.0644531, 0.0644531)
-shape = SubResource("CircleShape2D_5km6o")
+frame = 3
+frame_progress = 0.517774
