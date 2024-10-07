@@ -1,8 +1,8 @@
 extends CharacterBody2D
-@onready var hoodie_girl: Sprite2D = $HoodieGirlIdle01Sheet
-@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var hoodie_girl: AnimatedSprite2D = $HoodieGirlSprite
 @onready var collision_shape_player: CollisionShape2D = $CollisionShape_Player
 @onready var rect_shape = collision_shape_player.shape as RectangleShape2D 
+@onready var leash_raycast: RayCast2D = $Raycast/Leash_Raycast
 
 # Movement and physics variables
 @export var speed: float = 120.0
@@ -17,34 +17,46 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 800.0
 @export var max_step_height: float = 5.0
 
+# Leash Variables
+@export var whip_range: float = 75.0
+@export var pull_strength: float = 500.0
+@export var whip_damage: int = 10
+
 # Internal variables
 var is_on_ground: bool = false
 var direction: float = 0
 var coyote_time: float = 0.0
 var jump_buffer: float = 0.0
 
-# Leash Variables
-var leashed_position = Vector2()
-var leashed = false
-var leash_length = 75
-var current_leash_length
+
+## Limbo State Machine Variable
+var main_sm: LimboHSM
+
+
 
 func _ready():
-	animation_tree.active = true
-	current_leash_length = leash_length
+	# Start the Limbo State Machine
+	initiate_state_machine()
+
 
 func _process(delta):
-	update_animation_parameters()
+	if Input.is_action_just_pressed("left_click"):
+		leash_throw()
 
 # Called every frame
 func _physics_process(delta: float) -> void:
-	update_timers(delta)
+	# Call functions for movement and jumping
+	move_player(delta)
+	gravity_and_jump(delta)
+	update_timers(delta) # Timers for coyote time / jump buffer
 	
-	# Apply gravity and limit fall speed
-	if not is_on_ground:
-		velocity.y += gravity * delta
-		velocity.y = min(velocity.y, max_fall_speed)
-	
+	# Apply the movement and update the ground status
+	move_and_slide()
+	is_on_ground = is_on_floor()
+
+
+
+func move_player(delta):
 	# Horizontal input
 	var input_direction: float = 0.0
 	if Input.is_action_pressed("move_right"):
@@ -58,7 +70,19 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, input_direction * max_speed, acceleration * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
-		
+	
+		# Flip sprite horizontally when moving left or right
+	if direction < 0:
+		hoodie_girl.flip_h = false
+	elif direction > 0:
+		hoodie_girl.flip_h = true
+
+func gravity_and_jump(delta):
+		# Apply gravity and limit fall speed
+	if not is_on_ground:
+		velocity.y += gravity * delta
+		velocity.y = min(velocity.y, max_fall_speed)
+	
 	# Coyote time: Allows jumping shortly after leaving the ground
 	if is_on_ground:
 		coyote_time = coyote_time_duration
@@ -76,22 +100,6 @@ func _physics_process(delta: float) -> void:
 	# Variable jump: Cut jump short if the jump button is released early
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= jump_cutoff_multiplier
-	
-	# Flip sprite horizontally when moving left or right
-	if direction < 0:
-		hoodie_girl.flip_h = false
-	elif direction > 0:
-		hoodie_girl.flip_h = true
-	
-	# Check leash throw
-	leash_throw()
-	##update()
-	
-	
-	# Apply the movement and update the ground status
-	move_and_slide()
-	is_on_ground = is_on_floor()
-
 
 func update_timers(delta: float) -> void:
 	# Decrease coyote time and jump buffer over time
@@ -100,70 +108,116 @@ func update_timers(delta: float) -> void:
 	if jump_buffer > 0:
 		jump_buffer -= delta
 
-func update_animation_parameters():
-	if(velocity.x == 0):
-		animation_tree["parameters/conditions/idle"] = true
-		animation_tree["parameters/conditions/is_moving"] = false
-		#print("Idle True")
-	else:
-		animation_tree["parameters/conditions/idle"] = false
-		animation_tree["parameters/conditions/is_moving"] = true
-		#print("Idle False")
+
+func initiate_state_machine():
+	main_sm = LimboHSM.new()
+	add_child(main_sm)
 	
-	# Check for jump input
-	if(Input.is_action_just_pressed("jump")):
-		animation_tree["parameters/conditions/jump"] = true
-		#print("Jump True")
-	else:
-		animation_tree["parameters/conditions/jump"] = false
+	var idle_state = LimboState.new().named("idle").call_on_enter(idle_start).call_on_update(idle_update)
+	var walk_state = LimboState.new().named("walk").call_on_enter(walk_start).call_on_update(walk_update)
+	var jump_state = LimboState.new().named("jump").call_on_enter(jump_start).call_on_update(jump_update)
+	var attack_state = LimboState.new().named("attack").call_on_enter(attack_start).call_on_update(attack_update)
 	
-	# Check for use/interact input
-	if(Input.is_action_just_pressed("interact")):
-		animation_tree["parameters/conditions/interact"] = true
-		#print("Interact True")
-	else:
-		animation_tree["parameters/conditions/interact"] = false
+	main_sm.add_child(idle_state)
+	main_sm.add_child(walk_state)
+	main_sm.add_child(jump_state)
+	main_sm.add_child(attack_state)
+	
+	main_sm.initial_state = idle_state
+	
+	# Transitions between states - Must be specific in waht state can transition to what other state
+	main_sm.add_transition(idle_state, walk_state, &"to_walk")
+	main_sm.add_transition(main_sm.ANYSTATE, idle_state, &"state_ended")
+	main_sm.add_transition(idle_state, jump_state, &"to_jump")
+	main_sm.add_transition(walk_state, jump_state, &"to_jump")
+	main_sm.add_transition(main_sm.ANYSTATE, attack_state, &"to_attack")
+	
+	main_sm.initialize(self)
+	main_sm.set_active(true)
 
 
-# Function to check for step-up and adjust character position if necessary
-func handle_step_up():
-	var collision_info = move_and_collide(Vector2(velocity.x * get_physics_process_delta_time(), 0))
-	
-	if collision_info != null:
-		# Get the collider object
-		var collider = collision_info.get_collider()
-		
-		# Check if the collider is a StaticBody2D or another suitable body for stepping up
-		if collider is StaticBody2D or collider is TileMap:
-			var difference_in_height = collision_info.position.y - (position.y + rect_shape.extents.y)
-			
-			 # Only step up if the height difference is small enough (within max_step_height)
-			if difference_in_height > 0 and difference_in_height <= max_step_height:
-				# Move character upwards to simulate stepping up
-				position.y -= difference_in_height
-				velocity.y = 0  # Reset downward velocity after stepping up
+func _unhandled_input(event):
+	if event.is_action_pressed("interact"):
+		main_sm.dispatch(&"to_attack")
+	if event.is_action_pressed("left_click"):
+		main_sm.dispatch(&"to_attack")
 
+## State machine functions - Start + Update
+func idle_start():
+	hoodie_girl.play("idle")
+func idle_update(delta: float):
+	if velocity.x != 0:
+		main_sm.dispatch(&"to_walk")
+	if velocity.y != 0:
+		main_sm.dispatch(&"to_jump")
+
+func walk_start():
+	hoodie_girl.play("walk")
+func walk_update(delta: float):
+	if velocity.y != 0:
+		main_sm.dispatch(&"to_jump")
+	if velocity.x == 0:
+		main_sm.dispatch(&"state_ended")
+
+func jump_start():
+	hoodie_girl.play("jump_full")
+func jump_update(delta: float):
+	if velocity.y < 0:
+		hoodie_girl.play("jump_mid")
+	elif velocity.y > 0:
+		hoodie_girl.play("falling")
+	elif velocity.y == 0 && is_on_floor():
+		hoodie_girl.play("landing")
+		## I call the end of state dispatch using the on_animation_finished signal function
+
+func attack_start():
+	hoodie_girl.play("interact")
+	leash_throw()
+	# play leash animation
+func attack_update(delta: float):
+	# Check if we are on the last frame of the animation called in attack_start, if so revert to idle
+	if hoodie_girl.frame == hoodie_girl.sprite_frames.get_frame_count("interact") - 1:
+		main_sm.dispatch(&"state_ended")
 
 
 
 
 
 func leash_throw():
-	$Raycast.look_at(get_global_mouse_position())
+	print("Leash Throw Start")
+	var target_position = Vector2(whip_range, 0).rotated(rotation)
+	leash_raycast.target_position = target_position
+	leash_raycast.force_raycast_update()
 	
-	if Input.is_action_just_pressed("left_click"):
-		leashed_position = get_leash_position()
-		if leashed_position:
-			leashed = true
-			current_leash_length = global_position.distance_to(leashed_position)
+	if leash_raycast.is_colliding():
+		print("Leash Collided")
+		var hit_object = leash_raycast.get_collider()
+		
+		if hit_object.is_in_group("attachable"):
+			attach_to_object(hit_object)
+		elif hit_object.is_in_group("enemy"):
+			attack(hit_object)
+	print("Leash Throw Finish")
 
-
-func get_leash_position():
-	for raycast in $Raycast.get_children():
-		if raycast.is_colliding():
-			return raycast.get_collision_point()
+## Code to attach leash
+func attach_to_object(target):
+	if target is RigidBody2D:
+		var direction = (position - target.position).normalized()
+		target.apply_impulse(Vector2.ZERO, direction * pull_strength)
+	print ("Leash Attached to Object")
 
 func pull_leash():
-	pass
+	print("Leash pulled")
 	
 	## Pull object that is grabbed towards player
+
+func attack(enemy):
+	print("Enemy whipped!")
+
+
+
+func _on_animation_finished() -> void:
+	## Check what animation finished
+	# On landing animation finished, call state machine to revert to idle
+	if hoodie_girl.animation == "landing":
+		main_sm.dispatch(&"state_ended")

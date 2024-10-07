@@ -204,12 +204,10 @@ tile_set = SubResource("TileSet_1jk27")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer_SideWall/Wall_Roof_Collision"]
 z_index = 1
 position = Vector2(1145, -128)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xtogu")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TileMapLayer_SideWall/Wall_Roof_Collision"]
 position = Vector2(552, -79)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hy415")
 
 [node name="TileMapLayer_Fore_SideWall" type="TileMapLayer" parent="."]
@@ -219,7 +217,7 @@ tile_set = SubResource("TileSet_1jk27")
 
 [node name="Hoodie_Girl" parent="." instance=ExtResource("3_y3xpb")]
 z_index = 1
-position = Vector2(77, -13)
+position = Vector2(101, -29)
 
 [node name="Camera2D" type="Camera2D" parent="Hoodie_Girl"]
 position = Vector2(0, -33)

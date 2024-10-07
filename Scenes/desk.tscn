@@ -9,7 +9,7 @@ size = Vector2(46, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_st4bx"]
 size = Vector2(2, 21.75)
 
-[node name="desk" type="RigidBody2D"]
+[node name="desk" type="RigidBody2D" groups=["attachable"]]
 script = ExtResource("1_ttj3g")
 
 [node name="Desk01" type="Sprite2D" parent="."]
