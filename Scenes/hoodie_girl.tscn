@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://b20r7p25gf8a8"]
+[gd_scene load_steps=32 format=3 uid="uid://b20r7p25gf8a8"]
 
 [ext_resource type="Script" path="res://Scripts/hoodie_girl.gd" id="1_8awlb"]
 [ext_resource type="Texture2D" uid="uid://8ml6iu4chol" path="res://Assets/sprites/Hoodie_Girl_V2_Sheet_02.png" id="2_2utrx"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="3_y2dxk"]
+[ext_resource type="Script" path="res://Scripts/leash.gd" id="4_d658a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_amtyf"]
 radius = 7.0
@@ -229,7 +230,9 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Hoodie_Girl" type="CharacterBody2D"]
+[node name="Hoodie_Girl" type="CharacterBody2D" groups=["player"]]
+collision_layer = 4
+collision_mask = 14
 script = ExtResource("1_8awlb")
 
 [node name="CollisionShape_Player" type="CollisionShape2D" parent="."]
@@ -240,20 +243,36 @@ shape = SubResource("CapsuleShape2D_amtyf")
 [node name="HoodieGirlSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -38)
 sprite_frames = SubResource("SpriteFrames_iwi44")
-animation = &"interact"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 flip_h = true
 
 [node name="State Machine" type="Node" parent="."]
 script = ExtResource("3_y2dxk")
 
-[node name="Raycast" type="Node2D" parent="."]
-
-[node name="Leash_Raycast" type="RayCast2D" parent="Raycast"]
-position = Vector2(14, -24)
+[node name="Leash" type="Node2D" parent="."]
+position = Vector2(5, -30)
 rotation = -1.5708
+script = ExtResource("4_d658a")
+
+[node name="Leash_Raycast" type="RayCast2D" parent="Leash"]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(3, 0)
 target_position = Vector2(0, 75)
+collision_mask = 12
+
+[node name="Leash_Line" type="Line2D" parent="Leash"]
+points = PackedVector2Array(1, 0)
+width = 2.0
+default_color = Color(1, 0, 0.815686, 1)
+joint_mode = 2
+end_cap_mode = 2
+
+[node name="Debug_Line" type="Line2D" parent="Leash"]
+points = PackedVector2Array(1, 0)
+width = 1.0
+default_color = Color(0.919281, 4.47616e-06, 1.15514e-06, 1)
+joint_mode = 2
+end_cap_mode = 2
 
 [connection signal="animation_finished" from="HoodieGirlSprite" to="." method="_on_animation_finished"]

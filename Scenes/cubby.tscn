@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxtjaobv72jky"]
+
+[ext_resource type="Texture2D" uid="uid://bknk4xsqilrdw" path="res://Assets/sprites/School_Cubby_Front.png" id="1_7sl5e"]
+[ext_resource type="Texture2D" uid="uid://buy53efjellj6" path="res://Assets/sprites/School_Cubby_Back.png" id="1_fqqid"]
+[ext_resource type="Texture2D" uid="uid://b1ggc1pkwoalv" path="res://Assets/sprites/School_Cubby_Full01.png" id="3_ku1ih"]
+[ext_resource type="Texture2D" uid="uid://bnq0qaed8hhxk" path="res://Assets/sprites/School_Cubby_Full02.png" id="4_q7w7x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs7gk"]
+atlas = ExtResource("1_fqqid")
+region = Rect2(0, 0, 51, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1evqb"]
+atlas = ExtResource("1_7sl5e")
+region = Rect2(0, 0, 51, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bs52g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs7gk")
+}],
+"loop": false,
+"name": &"back",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1evqb")
+}],
+"loop": false,
+"name": &"front",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ku1ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q7w7x")
+}],
+"loop": true,
+"name": &"full_01",
+"speed": 2.0
+}]
+
+[node name="Cubby" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_bs52g")
+animation = &"full_01"
+autoplay = "front"
+frame_progress = 0.7519

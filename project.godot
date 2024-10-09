@@ -66,6 +66,15 @@ left_click={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="floor"
+2d_physics/layer_3="player"
+2d_physics/layer_4="interactable items"
+2d_physics/layer_5="background items"
+2d_physics/layer_6="foreground items"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
