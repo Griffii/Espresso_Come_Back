@@ -7,8 +7,12 @@ extends Node2D
 @onready var debug_line: Line2D = $Debug_Line
 
 # Leash Variables
+@export var weak: float = 1000.0
+@export var normal: float = 1250.0
+@export var strong: float = 1600.0
 @export var leash_range: float = 100.0
-@export var pull_strength: float = 1000.0
+@export var pull_strength: float = normal
+@export var drag_strength: float = 30.0
 @export var is_leashed = false
 @export var leashed_object = null
 @export var leashed_object_position = Vector2.ZERO
@@ -142,17 +146,23 @@ func update_leash(delta):
 		# Check length of leash, if it's longer than the max length, pull the object
 		var current_leash_length = (target_local_position - player_local_position).length()
 		##print ("Leash length: ", current_leash_length)
-		if current_leash_length > leash_range:
+		if current_leash_length > (leash_range * 1.5):
+			hoodie_girl_main.set_player_speed("slow")
+			pull_strength = strong
+		elif current_leash_length > leash_range:
 			leash_drag()
 		elif current_leash_length < leash_range:
 			# Reset player speed if drag is not called
 			hoodie_girl_main.set_player_speed("normal")
+			pull_strength = weak
 
 func leash_drag():
 	# Slow down player
-	hoodie_girl_main.set_player_speed("slow")
+	hoodie_girl_main.set_player_speed("drag")
+	pull_strength = normal
 	
 	var direction_to_player = (leash_line.global_position - leashed_object.global_position).normalized()
 	
-	var pull_force = direction_to_player * 30
+	var pull_force = direction_to_player * drag_strength
 	leashed_object.apply_impulse(pull_force)
+	

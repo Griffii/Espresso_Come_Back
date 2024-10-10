@@ -74,6 +74,8 @@ left_click={
 2d_physics/layer_4="interactable items"
 2d_physics/layer_5="background items"
 2d_physics/layer_6="foreground items"
+2d_physics/layer_7="students"
+2d_physics/layer_8="teachers"
 
 [rendering]
 

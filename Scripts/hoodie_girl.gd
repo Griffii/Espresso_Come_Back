@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var deceleration: float = 800.0 
 @export var normal_speed: float = 100.0
 @export var drag_speed: float = 50.0
+@export var slow_speed: float = 7.0
 @export var jump_force: float = -400.0
 @export var gravity: float = 1000.0
 @export var coyote_time_duration: float = 0.1  # Time window for coyote jump
@@ -25,8 +26,10 @@ var speed = normal_speed
 func set_player_speed(new_speed):
 	if new_speed == "normal":
 		speed = normal_speed
-	elif new_speed == "slow":
+	elif new_speed == "drag":
 		speed = drag_speed
+	elif new_speed == "slow":
+		speed = slow_speed
 
 # Internal variables
 var is_on_ground: bool = false
