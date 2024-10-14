@@ -1,13 +1,13 @@
-[gd_scene load_steps=28 format=4 uid="uid://cu51tohjiom1v"]
+[gd_scene load_steps=29 format=4 uid="uid://cu51tohjiom1v"]
 
 [ext_resource type="Texture2D" uid="uid://di8uhu1e0fqbs" path="res://Assets/environemnt tilesets/Beta1.1_TestMap_Floor_Tileset.png" id="1_l2v8c"]
 [ext_resource type="Texture2D" uid="uid://h7s43ycsmgxs" path="res://Assets/environemnt tilesets/Beta1.1_TestMap_Wall_TilesetV2.png" id="2_g8mf4"]
 [ext_resource type="Texture2D" uid="uid://hrajq8xax3w4" path="res://Assets/environemnt tilesets/Beta1.1_TestMap_SideWall_Tileset.png" id="3_karty"]
-[ext_resource type="PackedScene" uid="uid://b20r7p25gf8a8" path="res://Scenes/hoodie_girl.tscn" id="3_y3xpb"]
-[ext_resource type="PackedScene" uid="uid://bxtjaobv72jky" path="res://Scenes/cubby.tscn" id="4_dlgv5"]
-[ext_resource type="PackedScene" uid="uid://chsaijqm7l1ib" path="res://Scenes/desk.tscn" id="4_nnten"]
-[ext_resource type="PackedScene" uid="uid://c880bkl4ifdve" path="res://Scenes/cat_01.tscn" id="5_mfd3k"]
-[ext_resource type="PackedScene" uid="uid://bja0n1kwwvamq" path="res://Scenes/wandering_student.tscn" id="8_jau35"]
+[ext_resource type="PackedScene" uid="uid://b20r7p25gf8a8" path="res://Entities/Player/hoodie_girl.tscn" id="3_y3xpb"]
+[ext_resource type="PackedScene" uid="uid://bxtjaobv72jky" path="res://Entities/School_Props/Shoe Cubby/cubby.tscn" id="4_dlgv5"]
+[ext_resource type="PackedScene" uid="uid://chsaijqm7l1ib" path="res://Entities/School_Props/Desk/desk.tscn" id="4_nnten"]
+[ext_resource type="PackedScene" uid="uid://c880bkl4ifdve" path="res://Entities/Cat/cat_01.tscn" id="5_mfd3k"]
+[ext_resource type="PackedScene" uid="uid://bja0n1kwwvamq" path="res://Entities/Students/Wandering_Student_YR1/wandering_student.tscn" id="8_jau35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a4gb7"]
 texture = ExtResource("1_l2v8c")
@@ -179,6 +179,9 @@ pattern_0 = SubResource("TileMapPattern_tojvv")
 pattern_1 = SubResource("TileMapPattern_tr3pj")
 pattern_2 = SubResource("TileMapPattern_n5g54")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u82mx"]
+size = Vector2(20, 117)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtogu"]
 size = Vector2(114, 353)
 
@@ -234,6 +237,15 @@ tile_set = SubResource("TileSet_xlqbg")
 tile_map_data = PackedByteArray("AAAgAPX/AAADAAAAAAAhAPX/AAADAAIAAAAgAPT/AAADAAAAAAAgAPP/AAADAAAAAAAgAPL/AAADAAAAAAAgAPH/AAADAAAAAAAhAPT/AAADAAIAAAAhAPP/AAADAAIAAAAhAPL/AAADAAIAAAAhAPH/AAADAAIAAAAhAPD/AAADAAIAAAAgAO3/AAABAAAAAAAhAO3/AAACAAAAAAAgAPD/AAADAAAAAAAgAO//AAADAAAAAAAhAO//AAADAAIAAAAgAO7/AAADAAAAAAAhAO7/AAADAAIAAAAhAPb/AAADAAIAAAAhAPz/AAADAAEAAAAhAP3/AAADAAEAAAAgAPb/AAADAAAAAAAgAPf/AAAFAAAAAAAgAPj/AAAEAAAAAAAgAPn/AAAEAAAAAAAgAPr/AAAEAAAAAAAgAPv/AAAEAAAAAAAgAPz/AAAEAAAAAAAgAP3/AAAEAAAAAAAgAP//AAACAAUAAAAhAP7/AAADAAEAAAAhAP//AAAAAAIAAAAhAAAAAAABAAIAAAAhAPf/AAAFAAQAAAAhAPj/AAAGAAQAAAAhAPn/AAAAAAMAAAAhAPr/AAAGAAAAAAAhAPv/AAAAAAEAAAAiAPj/AAAFAAQAAAAiAPn/AAAGAAQAAAAiAPr/AAAAAAMAAAAiAPv/AAABAAUAAAAiAPz/AAACAAUAAAAjAPn/AAAFAAQAAAAjAPr/AAABAAEAAAAjAPv/AAACAAMAAAAjAPz/AAAAAAUAAAAjAP3/AAAGAAEAAAAjAP7/AAAGAAEAAAAjAP//AAAGAAEAAAAjAAAAAAAGAAEAAAAjAAEAAAAGAAUAAAAjAAIAAAAFAAUAAAAkAPr/AAACAAEAAAAkAPv/AAAFAAEAAAAkAPz/AAAFAAEAAAAkAP3/AAAFAAEAAAAkAP7/AAAFAAEAAAAkAP//AAAFAAEAAAAkAAAAAAAFAAEAAAAkAAEAAAAFAAEAAAAkAAIAAAACAAIAAAAgAP7/AAAEAAUAAABGAAIAAAACAAIAAABFAAIAAAAFAAUAAABEAAEAAAACAAUAAABDAAAAAAACAAUAAABFAAEAAAAEAAEAAABEAAAAAAABAAUAAABDAP//AAABAAUAAABCAP//AAACAAUAAABCAP7/AAAEAAUAAABGAAEAAAAFAAEAAABGAAAAAAAFAAEAAABGAP//AAAFAAEAAABGAP7/AAAFAAEAAABGAP3/AAAFAAEAAABGAPz/AAAFAAEAAABGAPv/AAAFAAEAAABFAAAAAAACAAMAAABFAP//AAACAAMAAABFAP7/AAACAAMAAABFAP3/AAACAAMAAABFAPz/AAACAAMAAABFAPv/AAACAAMAAABFAPr/AAACAAMAAABFAPf/AAACAAMAAABFAPj/AAACAAMAAABFAPn/AAACAAMAAABFAPT/AAACAAMAAABFAPX/AAACAAMAAABFAPb/AAACAAMAAABFAPP/AAACAAMAAABFAPL/AAACAAMAAABFAPH/AAACAAMAAABGAPD/AAABAAMAAABFAPD/AAADAAYAAABEAO//AAADAAYAAABFAO//AAACAAYAAABEAO7/AAACAAYAAABDAO3/AAACAAYAAABDAO7/AAADAAYAAABGAPH/AAAFAAEAAABGAPL/AAAFAAEAAABGAPP/AAAFAAEAAABGAPT/AAAFAAEAAABGAPX/AAAFAAEAAABGAPb/AAAFAAEAAABGAPf/AAAFAAEAAABGAPj/AAAFAAEAAABGAPn/AAAFAAEAAABGAPr/AAAFAAEAAABEAPD/AAABAAYAAABDAO//AAABAAYAAABCAO7/AAAAAAYAAABCAO3/AAAGAAIAAABCAO//AAAEAAAAAABCAPD/AAAEAAAAAABCAPH/AAAEAAAAAABDAPD/AAAAAAMAAABDAPH/AAAAAAMAAABEAPH/AAAAAAMAAABDAP7/AAAAAAMAAABDAPL/AAAAAAMAAABDAP3/AAAAAAMAAABDAPP/AAAAAAMAAABDAPT/AAAAAAMAAABDAPX/AAAAAAMAAABDAPb/AAAAAAMAAABDAPf/AAAAAAMAAABDAPj/AAAAAAMAAABDAPn/AAAAAAMAAABDAPr/AAAAAAMAAABDAPv/AAAAAAMAAABDAPz/AAAAAAMAAABEAP//AAAAAAMAAABEAP7/AAAAAAMAAABEAP3/AAAAAAMAAABEAPz/AAAAAAMAAABEAPv/AAAAAAMAAABEAPr/AAAAAAMAAABEAPn/AAAAAAMAAABEAPj/AAAAAAMAAABEAPf/AAAAAAMAAABEAPb/AAAAAAMAAABEAPX/AAAAAAMAAABEAPT/AAAAAAMAAABEAPP/AAAAAAMAAABEAPL/AAAAAAMAAABCAP3/AAAEAAAAAABCAPz/AAAEAAAAAABCAPv/AAAEAAAAAABCAPr/AAAEAAAAAABCAPn/AAAEAAAAAABCAPj/AAAEAAAAAABCAPf/AAAEAAAAAABCAPb/AAAEAAAAAABCAPX/AAAEAAAAAABCAPT/AAAEAAAAAABCAPP/AAAEAAAAAABCAPL/AAAEAAAAAABCAOz/AAAFAAIAAABEAAIAAAADAAUAAABDAAEAAAADAAUAAABCAAAAAAADAAUAAABBAP//AAADAAUAAAA=")
 tile_set = SubResource("TileSet_1jk27")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMaps/TileMapLayer_SideWall"]
+collision_layer = 16
+collision_mask = 208
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TileMaps/TileMapLayer_SideWall/StaticBody2D"]
+z_index = 5
+position = Vector2(1073, -65)
+shape = SubResource("RectangleShape2D_u82mx")
+
 [node name="Wall_Roof_Collision" type="StaticBody2D" parent="TileMaps/TileMapLayer_SideWall"]
 collision_layer = 51
 collision_mask = 63
@@ -254,7 +266,7 @@ tile_set = SubResource("TileSet_1jk27")
 
 [node name="Hoodie_Girl" parent="." instance=ExtResource("3_y3xpb")]
 z_index = 1
-position = Vector2(753, -25)
+position = Vector2(33, -5)
 collision_mask = 10
 
 [node name="Camera2D" type="Camera2D" parent="Hoodie_Girl"]
@@ -293,7 +305,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="desk5" parent="Props/Desks Background" instance=ExtResource("4_nnten")]
-position = Vector2(642, -36)
+position = Vector2(836, -33)
 collision_layer = 16
 collision_mask = 16
 
@@ -328,22 +340,16 @@ collision_mask = 16
 position = Vector2(178, -15)
 
 [node name="desk2" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -31)
+position = Vector2(448, -12)
 
 [node name="desk3" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -65)
+position = Vector2(448, -46)
 
 [node name="desk4" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -104)
+position = Vector2(448, -85)
 
 [node name="desk5" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -142)
-
-[node name="desk6" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -180)
-
-[node name="desk7" parent="Props/Desks Interactable" instance=ExtResource("4_nnten")]
-position = Vector2(484, -219)
+position = Vector2(448, -123)
 
 [node name="Cubbies" type="Node2D" parent="Props"]
 
@@ -355,7 +361,7 @@ frame_progress = 0.0
 [node name="Cubby" parent="Props/Cubbies" instance=ExtResource("4_dlgv5")]
 position = Vector2(-17, -25)
 autoplay = "full_01"
-frame_progress = 0.0
+frame_progress = 0.205391
 
 [node name="Cubby2" parent="Props/Cubbies" instance=ExtResource("4_dlgv5")]
 position = Vector2(-67, -25)

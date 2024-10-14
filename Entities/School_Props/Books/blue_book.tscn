@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt0qxye0iqu47"]
+
+[ext_resource type="Texture2D" uid="uid://cc5mw6sef2hnm" path="res://Entities/School_Props/Books/LilBlueBook01.png" id="1_s8gy1"]
+
+[node name="BlueBook" type="Sprite2D"]
+position = Vector2(-1, -5)
+scale = Vector2(0.0664063, 0.0664063)
+texture = ExtResource("1_s8gy1")

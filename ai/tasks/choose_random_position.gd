@@ -8,8 +8,7 @@ extends BTAction
 
 
 func _tick(_delta: float) -> Status:
-	print(agent, " wandering")
-	
+	#print(agent, " wandering")
 	var pos: Vector2
 	var dir = rando_dir()
 	

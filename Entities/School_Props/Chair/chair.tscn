@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciytfg4jk7kbv"]
+
+[ext_resource type="Texture2D" uid="uid://lqsavswyv8bv" path="res://Entities/School_Props/Chair/Chair01.png" id="1_w1att"]
+
+[node name="chair" type="Node2D"]
+
+[node name="Chair01" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 1.90735e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("1_w1att")

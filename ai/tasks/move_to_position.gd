@@ -21,7 +21,7 @@ func _tick(_delta: float) -> Status:
 		return SUCCESS
 	# If they stop moving (impassable object), failure
 	elif agent.velocity.x == 0:
-		print("Agent stuck")
+		#print("Agent stuck")
 		obstacle_ticker += 1
 		if obstacle_ticker >= obstacle_tick_max:
 			obstacle_ticker = 0
