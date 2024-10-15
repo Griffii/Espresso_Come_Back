@@ -43,12 +43,15 @@ func Enter():
 	else:
 		leash_throw()
 
-func Physics_Update(_delta):
+func Update(_delta):
+	# Chcek for input
 	if Input.is_action_just_pressed("left_click"):
 		if is_leashed:
 			pull_leash()
 		else:
 			leash_throw()
+
+func Physics_Update(_delta):
 	# Dynamically update leash line if attached
 	update_leash(_delta)
 	
@@ -67,9 +70,6 @@ func Physics_Update(_delta):
 	elif not character.is_on_ground and not animating_leash and not retracting_leash:
 		if not is_leashed:
 			next_state = air_state
-	
-	
-		# If dragging check what side of the object you're one and face the object
 
 
 
@@ -127,7 +127,7 @@ func stop_grappling():
 	leashed_object = null
 	leash_line.visible = false
 	# Reset speed incase grapple stopped with leassh at full length
-	character.set_player_speed(character.normal_speed)
+	character.speed = (character.normal_speed)
 	# Set state back to ground or air
 	if character.is_on_floor():
 		next_state = ground_state
@@ -194,21 +194,21 @@ func update_leash(delta):
 		leash_line.points = [player_local_position, target_local_position]
 		
 		# Check length of leash, if it's longer than the max length, pull the object
-		var current_leash_length = (target_local_position - player_local_position).length()
+		current_leash_length = (target_local_position - player_local_position).length()
 		##print ("Leash length: ", current_leash_length)
 		if current_leash_length > (leash_range * 1.5):
-			character.set_player_speed(character.slow_speed)
+			character.speed = (character.slow_speed)
 			pull_strength = strong
 		elif current_leash_length > leash_range:
 			leash_drag()
 		elif current_leash_length < leash_range:
 			# Reset player speed if drag is not called
-			character.set_player_speed(character.normal_speed)
+			character.speed = (character.normal_speed)
 			pull_strength = weak
 
 func leash_drag():
 	# Slow down player
-	character.set_player_speed(character.drag_speed)
+	character.speed = (character.drag_speed)
 	pull_strength = normal
 	
 	var direction_to_player = (leash_line.global_position - leashed_object.global_position).normalized()

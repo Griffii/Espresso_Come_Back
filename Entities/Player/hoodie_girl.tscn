@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b20r7p25gf8a8"]
+[gd_scene load_steps=31 format=3 uid="uid://b20r7p25gf8a8"]
 
 [ext_resource type="Script" path="res://Entities/Player/hoodie_girl.gd" id="1_8awlb"]
 [ext_resource type="Texture2D" uid="uid://cbpy3aaiiincp" path="res://Entities/Player/Player_SpriteSheet_V4.png" id="2_6k8bn"]
@@ -10,12 +10,15 @@
 [ext_resource type="Script" path="res://Entities/Player/States/crouch_state.gd" id="8_a6iuu"]
 [ext_resource type="Script" path="res://Entities/Player/States/state_debug_label.gd" id="8_a8117"]
 [ext_resource type="FontFile" uid="uid://77pb63feqlcs" path="res://Assets/fonts/PixelOperator8.ttf" id="8_c555u"]
-[ext_resource type="Script" path="res://Entities/Player/States/push_state.gd" id="9_qki5q"]
 [ext_resource type="Script" path="res://Entities/Player/States/dash_state.gd" id="10_itjjn"]
+[ext_resource type="Script" path="res://Entities/Player/States/grab_state.gd" id="11_2iheb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_amtyf"]
 radius = 6.5
 height = 54.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtueb"]
+size = Vector2(4, 15)
 
 [sub_resource type="Animation" id="Animation_8dtl6"]
 length = 0.001
@@ -293,12 +296,19 @@ texture = ExtResource("2_6k8bn")
 flip_h = true
 hframes = 7
 vframes = 5
-frame = 32
 
 [node name="CollisionShape_Player" type="CollisionShape2D" parent="."]
 process_physics_priority = 1
 position = Vector2(0, -27)
 shape = SubResource("CapsuleShape2D_amtyf")
+
+[node name="Grab_Box" type="Area2D" parent="."]
+position = Vector2(9, -24)
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab_Box"]
+shape = SubResource("RectangleShape2D_mtueb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -318,7 +328,7 @@ target_position = Vector2(0, -50)
 collision_mask = 11
 
 [node name="Leash_Point" type="Node2D" parent="."]
-position = Vector2(6, -24)
+position = Vector2(0, -24)
 
 [node name="Leash_Raycast" type="RayCast2D" parent="Leash_Point"]
 self_modulate = Color(0, 1, 0, 1)
@@ -338,12 +348,12 @@ animation_player = NodePath("../AnimationPlayer")
 character = NodePath("..")
 initial_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "crouch_state", "leash_state", "push_state", "dash_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "crouch_state", "leash_state", "grab_state", "dash_state")]
 script = ExtResource("5_ubs6t")
 air_state = NodePath("../Air")
 crouch_state = NodePath("../Crouch")
 leash_state = NodePath("../Leash")
-push_state = NodePath("../Push")
+grab_state = NodePath("../Grab")
 dash_state = NodePath("../Dash")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state", "leash_state", "dash_state")]
@@ -355,6 +365,7 @@ dash_state = NodePath("../Dash")
 [node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("7_hwlnm")
 ground_state = NodePath("../Ground")
+can_move = false
 
 [node name="Crouch" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "ground_state", "dash_state")]
 script = ExtResource("8_a6iuu")
@@ -364,24 +375,28 @@ dash_state = NodePath("../Dash")
 
 [node name="Leash" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "ground_state")]
 script = ExtResource("4_d658a")
+weak = 500.0
+normal = 750.0
+strong = 100.0
+drag_strength = 75.0
 air_state = NodePath("../Air")
 ground_state = NodePath("../Ground")
 
-[node name="Push" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "crouch_state", "leash_state", "ground_state")]
-script = ExtResource("9_qki5q")
-air_state = NodePath("../Air")
-crouch_state = NodePath("../Crouch")
-leash_state = NodePath("../Leash")
-ground_state = NodePath("../Ground")
-
-[node name="Dash" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "ground_state", "leash_state", "push_state")]
+[node name="Dash" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "ground_state")]
 script = ExtResource("10_itjjn")
 air_state = NodePath("../Air")
 ground_state = NodePath("../Ground")
-leash_state = NodePath("../Leash")
-push_state = NodePath("../Push")
+
+[node name="Grab" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "crouch_state", "ground_state")]
+script = ExtResource("11_2iheb")
+air_state = NodePath("../Air")
+crouch_state = NodePath("../Crouch")
+ground_state = NodePath("../Ground")
+idle_animation = "leash_hold"
+walk_animation = "leash_walk"
 
 [node name="State_Label" type="Label" parent="."]
+visible = false
 offset_left = -55.0
 offset_top = -80.0
 offset_right = 68.0

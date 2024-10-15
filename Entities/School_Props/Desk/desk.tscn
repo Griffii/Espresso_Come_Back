@@ -8,33 +8,32 @@ size = Vector2(36, 7.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kthny"]
 radius = 0.75
-height = 18.0
+height = 16.5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a7coy"]
 radius = 0.75
-height = 18.0
+height = 16.5
 
 [node name="desk" type="RigidBody2D" groups=["attachable"]]
-position = Vector2(0, -22)
 collision_layer = 8
-collision_mask = 14
+collision_mask = 15
 mass = 3.0
-lock_rotation = true
+can_sleep = false
 script = ExtResource("1_ttj3g")
 
 [node name="Desk01" type="Sprite2D" parent="."]
-position = Vector2(0, 9)
+position = Vector2(0.200001, 8.8)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_4yhom")
 
 [node name="DeskBody_Collision" type="CollisionShape2D" parent="."]
-position = Vector2(9.53674e-07, 0.25)
+position = Vector2(0.200001, -0.2)
 shape = SubResource("RectangleShape2D_c0a1m")
 
 [node name="LeftLeg_Collision" type="CollisionShape2D" parent="."]
-position = Vector2(-12.8, 12)
+position = Vector2(-12.8, 12.8)
 shape = SubResource("CapsuleShape2D_kthny")
 
 [node name="RightLeg_Collision" type="CollisionShape2D" parent="."]
-position = Vector2(12.8, 12)
+position = Vector2(13.2, 12.8)
 shape = SubResource("CapsuleShape2D_a7coy")

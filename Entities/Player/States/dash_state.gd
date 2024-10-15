@@ -5,8 +5,6 @@ class_name DashState
 # State and Animation Names
 @export var air_state : State
 @export var ground_state : State
-@export var leash_state : State
-@export var push_state : State
 #@export var dash_animation : String = "dash"
 
 var gravity
@@ -24,6 +22,11 @@ func Enter():
 	character.gravity = 0.0
 	character.dash_direction = character.get_dash_direction()
 
+func Exit():
+	character.gravity = gravity            # Turn ON gravity
+	character.is_dashing = false           # Reset is_dashing
+	character.set_player_speed(character.normal_speed) # make them slow again
+	character.halt_movement()              # Set velocity to ZER), stop all movement
 
 func Physics_Update(_delta):
 	# Change state if timer is over
@@ -33,9 +36,4 @@ func Physics_Update(_delta):
 		else:
 			next_state = air_state
 
-
-func Exit():
-	character.gravity = gravity            # Turn ON gravity
-	character.is_dashing = false           # Reset is_dashing
-	character.set_player_speed(character.normal_speed) # make them slow again
-	character.halt_movement()              # Set velocity to ZER), stop all movement
+##### Decided to remove dash from gameplay, leaving the state incase I change my mind later ####

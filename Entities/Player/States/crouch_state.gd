@@ -14,19 +14,19 @@ class_name CrouchState
 @onready var crouch_raycast_left: RayCast2D = $"../../Crouch_Raycast_Left"
 @onready var crouch_raycast_right: RayCast2D = $"../../Crouch_Raycast_Right"
 
-
+# Variables
 var is_holding_crouch = false
 
 func Enter():
 	is_holding_crouch = true
-	character.set_player_speed(character.drag_speed)
+	character.speed = character.drag_speed
 	setCrouchCollision()
 	
 	crouch_raycast_left.enabled = true
 	crouch_raycast_right.enabled = true
 
 func Exit():
-	character.set_player_speed(character.normal_speed)
+	character.speed = character.normal_speed
 	setDefaultCollision()
 	
 	crouch_raycast_left.enabled = false
@@ -48,9 +48,13 @@ func state_input(event : InputEvent):
 		next_state = ground_state
 
 func Update(_delta):
+	# Constantly check for crouch input
 	if Input.is_action_pressed("move_down"):
 		is_holding_crouch = true
-	
+	else:
+		is_holding_crouch = false
+
+func Physics_Update(_delta):
 	if character.is_on_ground:
 		# Check for movement and call animations
 		if character.velocity.x == 0:
@@ -60,7 +64,8 @@ func Update(_delta):
 	# If falling, change states
 	else:
 		next_state = air_state
-	# Check if crouch was released
+		
+	# Check if crouch was released and that there is no overhead collider
 	if is_holding_crouch == false and (!crouch_raycast_left.is_colliding() and !crouch_raycast_right.is_colliding()):
 		next_state = ground_state
 

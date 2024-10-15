@@ -1,9 +1,9 @@
 # Generic state machine. Initializes states and delegates engine callbacks
-# (_physics_process, _unhandled_input) to the active state.
+# (_physics_process, _input) to the active state.
 extends Node
 class_name StateMachine
 
-# Emitted when transitioning to a new state.
+# Emitted when transitioning to a new state. ## Not currently in use but signals might be useful later?
 signal transitioned(state_name)
 
 @export var animation_player: AnimationPlayer
@@ -28,7 +28,7 @@ func _ready():
 		current_state = initial_state
 
 
-# Call the current state and update function continously
+# Function Accessible By All State Nodes
 func _process(delta: float) -> void:
 	if current_state:
 		current_state.Update(delta)

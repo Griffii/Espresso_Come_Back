@@ -17,6 +17,9 @@ class_name AirState
 var has_double_jumped = false
 
 func Update(delta):
+	pass
+
+func Physics_Update(delta):
 	if character.velocity.y < 0:
 		animation_player.play(jumping_up)
 	elif character.velocity.y > 0:
@@ -24,12 +27,10 @@ func Update(delta):
 	elif character.velocity.y == 0:
 		next_state = landing_state
 
-func Physics_Update(delta):
-	pass
-
 func state_input(event : InputEvent):
 	if event.is_action_pressed("jump") && not has_double_jumped:
-		double_jump()
+		#double_jump()
+		pass
 	
 	if event.is_action_pressed("left_click"):
 		next_state = leash_state
@@ -44,16 +45,31 @@ func double_jump():
 	has_double_jumped = true
 
 func Enter():
-	#animation_player.play(jump_start_animation)
-	pass
+	setJumpCollision()
 
 func Exit():
+	setDefaultCollision()
 	if next_state == landing_state:
 		animation_player.play(landing_animation)
 		has_double_jumped = false
 	else:
 		has_double_jumped = false
 
+func setJumpCollision():
+	var new_shape = CapsuleShape2D.new()
+	var position = Vector2(0,-22)
+	new_shape.radius = 6.5
+	new_shape.height = 44
+	character.collision_shape_player.shape = new_shape
+	character.collision_shape_player.position = position
+
+func setDefaultCollision():
+	var new_shape = CapsuleShape2D.new()
+	var position = Vector2(0,-27)
+	new_shape.radius = 6.5
+	new_shape.height = 54
+	character.collision_shape_player.shape = new_shape
+	character.collision_shape_player.position = position
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# If double jump is called go back to the jumping up animation after jumping once more
