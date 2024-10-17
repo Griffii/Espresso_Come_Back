@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy0gerav6he4m"
-path="res://.godot/imported/Beta1.1_TestMap_Wall_Tileset.png-4bce822b5180461cb670faf85473bea4.ctex"
+uid="uid://cj08sd4meqpof"
+path="res://.godot/imported/SkyBox_01_Layer2_Buildings_960x540.png-9ea06a370dc5fc243b62d6226949b055.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/environemnt tilesets/Beta1.1_TestMap_Wall_Tileset.png"
-dest_files=["res://.godot/imported/Beta1.1_TestMap_Wall_Tileset.png-4bce822b5180461cb670faf85473bea4.ctex"]
+source_file="res://Assets/sky boxes/sky_box_01/SkyBox_01_Layer2_Buildings_960x540.png"
+dest_files=["res://.godot/imported/SkyBox_01_Layer2_Buildings_960x540.png-9ea06a370dc5fc243b62d6226949b055.ctex"]
 
 [params]
 

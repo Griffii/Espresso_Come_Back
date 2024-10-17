@@ -24,6 +24,10 @@ window/size/viewport_height=720
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
+[global_group]
+
+attachable=""
+
 [input]
 
 jump={

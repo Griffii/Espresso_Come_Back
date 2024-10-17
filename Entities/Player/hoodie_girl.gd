@@ -9,44 +9,45 @@ extends CharacterBody2D
 @onready var grab_box: Area2D = $Grab_Box
 
 # Dash Control Variables  ## NOT USED ##
-@export var dash_speed: float = 800.0  # Speed of the dash
-@export var dash_duration: float = 0.15  # How long the dash lasts (in seconds)
-@export var dash_cooldown: float = 2.0  # Cooldown between dashes
-@export var dash_count: int = 1  # Number of dashes allowed before needing to touch the ground
+@export var dash_speed: float = 800.0             # Speed of the dash
+@export var dash_duration: float = 0.15           # How long the dash lasts (in seconds)
+@export var dash_cooldown: float = 2.0            # Cooldown between dashes
+@export var dash_count: int = 1                   # Number of dashes allowed before needing to touch the ground
 @export var dash_recharge_on_ground: bool = true  # Recharges dash when touching ground
 
 # Wall Slide/Jump Variables  ## NOT USED ##
 @export var wall_jump_force: Vector2 = Vector2(-300, -400)  # Velocity applied when wall jumping
-@export var wall_slide_speed: float = 50.0  # Speed when sliding down a wall
-@export var climb_speed: float = 100.0  # Speed of climbing up/down walls
-@export var max_climb_time: float = 1.5  # Time the player can stay on the wall before tiring
-@export var wall_jump_gravity: float = 600.0  # Gravity applied while wall jumping
+@export var wall_slide_speed: float = 50.0        # Speed when sliding down a wall
+@export var climb_speed: float = 100.0            # Speed of climbing up/down walls
+@export var max_climb_time: float = 1.5           # Time the player can stay on the wall before tiring
+@export var wall_jump_gravity: float = 600.0      # Gravity applied while wall jumping
 
 # Movement and physics variables
 @export var acceleration: float = 800.0
 @export var deceleration: float = 600.0
-@export var air_control: float = 0.5            # Reduce movement control in the air
+@export var air_control: float = 0.5              # Reduce movement control in the air
 
 # Variable Player Speeds
 @export var normal_speed: float = 120.0
 @export var drag_speed: float = 50.0
 @export var slow_speed: float = 7.0
 
-@export var push_force: float = 150.0            # Pushing force when walking into objects
-@export var jump_force: float = -400.0           # Jump height
-@export var gravity: float = 980.0               # Gravity force
-@export var max_fall_speed: float = 600.0        # Max fall speed
+@export var push_force: float = 150.0             # Pushing force when walking into objects
+@export var jump_force: float = -350.0            # Jump height
+@export var gravity: float = 980.0                # Gravity force
+@export var max_fall_speed: float = 600.0         # Max fall speed
 
-@export var jump_buffer_duration: float = 0.1    # Time window for jump buffer
-@export var jump_cutoff_multiplier: float = 0.2  # Multiplier to reduce jump height if key is released early
-@export var coyote_time_duration: float = 0.1    # Time window for coyote jump
+@export var jump_buffer_duration: float = 0.15    # Time window for jump buffer
+@export var jump_cutoff_multiplier: float = 0.5   # Multiplier to reduce jump height if key is released early
+@export var coyote_time_duration: float = 0.1     # Time window for coyote jump
 
 ###################################################################################################
 
 # Internal variables
 var speed : float = normal_speed         # Current player speed
 var direction: float = 0.0               # Current input_direction as a float
-var facing_direction: float = 1.0        # Last direction faced (Left or Right)
+var facing_direction: float = 1.0        # Last direction faced (Left or Right | Only updates when directoin is )
+var plat_vel = Vector2.ZERO              # Store x velocity of moving platforms
 
 var is_on_ground: bool = false
 var is_dashing: bool = false
@@ -58,12 +59,13 @@ var dash_cooldown_timer: float = 0.0
 var coyote_time: float = 0.0
 var jump_buffer: float = 0.0
 
+
 ###################################################################################################
 
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -97,9 +99,9 @@ func move_player(delta):
 		direction = facing_direction
 		velocity.x = facing_direction * speed
 	else:
-		# Regular movement if not dashing
+		# Apply player input control
 		if input_direction != 0 && state_machine.check_if_can_move():
-			# Move character in input direction
+			# Move character in input direction with acceleration
 			direction = input_direction
 			velocity.x = move_toward(velocity.x, input_direction * speed, acceleration * delta)
 			
@@ -137,9 +139,25 @@ func gravity_and_jump(delta):
 	
 	# Jumping logic
 	if coyote_time > 0 and jump_buffer > 0:
+		if is_on_ground and plat_vel.x != 0:   # Only works if the x velocity is greate than 1 pixel in either direction
+			# Add platform velocity to jump and lower deceleration to keep momentum
+			print(velocity.x, " + ", plat_vel.x)
+			velocity.x += plat_vel.x
+			print("Jump with compounded velocity: ", velocity.x)
+			deceleration *= 0.175
+			acceleration *= 0.75
 		velocity.y = jump_force
 		coyote_time = 0.0
 		jump_buffer = 0.0
+	
+	# Jump cutoff logic (reduce jump height if jump button is released early)
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y *= jump_cutoff_multiplier
+	
+	# Get platform velocity incase standing on moving platform
+	var current_plat_vel = get_platform_velocity()
+	if current_plat_vel != Vector2.ZERO:
+		plat_vel = current_plat_vel
 
 func update_timers(delta: float) -> void:
 	# Update temporary timers every delta

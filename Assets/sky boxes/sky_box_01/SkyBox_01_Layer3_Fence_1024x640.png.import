@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hy1mwlshcsgy"
-path="res://.godot/imported/Free-Sky-with-Clouds-Background-Pixel.png-d584e61181f3ccac94135efcdbd6bfd3.ctex"
+uid="uid://ciuk6wyoqtf5a"
+path="res://.godot/imported/SkyBox_01_Layer3_Fence_1024x640.png-d9ba9dab40ec69881a34e64abdbd92aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/environemnt tilesets/Free-Sky-with-Clouds-Background-Pixel.png"
-dest_files=["res://.godot/imported/Free-Sky-with-Clouds-Background-Pixel.png-d584e61181f3ccac94135efcdbd6bfd3.ctex"]
+source_file="res://Assets/sky boxes/sky_box_01/SkyBox_01_Layer3_Fence_1024x640.png"
+dest_files=["res://.godot/imported/SkyBox_01_Layer3_Fence_1024x640.png-d9ba9dab40ec69881a34e64abdbd92aa.ctex"]
 
 [params]
 

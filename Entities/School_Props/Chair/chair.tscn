@@ -1,10 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciytfg4jk7kbv"]
+[gd_scene load_steps=5 format=3 uid="uid://ciytfg4jk7kbv"]
 
+[ext_resource type="Script" path="res://Entities/School_Props/Chair/chair.gd" id="1_a68wy"]
 [ext_resource type="Texture2D" uid="uid://lqsavswyv8bv" path="res://Entities/School_Props/Chair/Chair01.png" id="1_w1att"]
 
-[node name="chair" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yolpi"]
+size = Vector2(23, 20.8125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_miekf"]
+size = Vector2(20, 13)
+
+[node name="chair" type="RigidBody2D" groups=["attachable"]]
+collision_layer = 8
+collision_mask = 15
+can_sleep = false
+script = ExtResource("1_a68wy")
 
 [node name="Chair01" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, 1.90735e-06)
-scale = Vector2(0.3125, 0.3125)
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_w1att")
+
+[node name="Chair_Seat_Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.59375)
+shape = SubResource("RectangleShape2D_yolpi")
+
+[node name="ChairBack" type="Area2D" parent="."]
+collision_layer = 18
+collision_mask = 3
+
+[node name="Chair_Back_Collision" type="CollisionShape2D" parent="ChairBack"]
+position = Vector2(0, -17.5)
+shape = SubResource("RectangleShape2D_miekf")

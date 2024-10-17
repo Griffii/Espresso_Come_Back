@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h7s43ycsmgxs"
-path="res://.godot/imported/Beta1.1_TestMap_Wall_TilesetV2.png-aaf5009bda192cc11a4f20d08cf86d8f.ctex"
+uid="uid://cjj23fkx04s53"
+path="res://.godot/imported/Beta1.25_BackgroundWallTiles_2D_V3.png-bbbea2e2ec4f30d310f079623ea0af4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/environemnt tilesets/Beta1.1_TestMap_Wall_TilesetV2.png"
-dest_files=["res://.godot/imported/Beta1.1_TestMap_Wall_TilesetV2.png-aaf5009bda192cc11a4f20d08cf86d8f.ctex"]
+source_file="res://Assets/environemnt tilesets/Beta1.25_BackgroundWallTiles_2D_V3.png"
+dest_files=["res://.godot/imported/Beta1.25_BackgroundWallTiles_2D_V3.png-bbbea2e2ec4f30d310f079623ea0af4b.ctex"]
 
 [params]
 

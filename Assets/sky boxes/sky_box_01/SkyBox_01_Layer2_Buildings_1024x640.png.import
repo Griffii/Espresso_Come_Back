@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbk0hcrwgwatn"
-path="res://.godot/imported/Beta1.2_FloorTiles_2D.png-fb83734d36ab6192c2fbeae46b51f7c8.ctex"
+uid="uid://dt5xnje4ql1fi"
+path="res://.godot/imported/SkyBox_01_Layer2_Buildings_1024x640.png-c3b33f0d81ed6348b93f80fecbc42e54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/environemnt tilesets/Beta1.2_FloorTiles_2D.png"
-dest_files=["res://.godot/imported/Beta1.2_FloorTiles_2D.png-fb83734d36ab6192c2fbeae46b51f7c8.ctex"]
+source_file="res://Assets/sky boxes/sky_box_01/SkyBox_01_Layer2_Buildings_1024x640.png"
+dest_files=["res://.godot/imported/SkyBox_01_Layer2_Buildings_1024x640.png-c3b33f0d81ed6348b93f80fecbc42e54.ctex"]
 
 [params]
 

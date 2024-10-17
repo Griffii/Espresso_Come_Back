@@ -3,9 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://5313cdycwtby" path="res://Entities/Cat/Cat01_SpriteTileSet.png" id="1_1owho"]
 [ext_resource type="Script" path="res://Entities/Cat/cat_01.gd" id="1_8yvv5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5km6o"]
-radius = 77.5758
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_417i4"]
 atlas = ExtResource("1_1owho")
 region = Rect2(0, 0, 256, 256)
@@ -147,15 +144,13 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngald"]
+size = Vector2(124.121, 170.667)
+
 [node name="Cat01" type="CharacterBody2D"]
 collision_layer = 17
-collision_mask = 10
+collision_mask = 202
 script = ExtResource("1_8yvv5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7, -7)
-scale = Vector2(0.0644531, 0.0644531)
-shape = SubResource("CircleShape2D_5km6o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8.75, -8.75)
@@ -165,3 +160,8 @@ animation = &"idle01"
 autoplay = "idle01"
 frame = 3
 frame_progress = 0.517774
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, -6.5)
+scale = Vector2(0.0644531, 0.0644531)
+shape = SubResource("RectangleShape2D_ngald")
