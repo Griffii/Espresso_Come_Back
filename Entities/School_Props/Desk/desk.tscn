@@ -21,11 +21,6 @@ mass = 3.0
 can_sleep = false
 script = ExtResource("1_ttj3g")
 
-[node name="Desk01" type="Sprite2D" parent="."]
-position = Vector2(0.200001, 8.8)
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("1_4yhom")
-
 [node name="DeskBody_Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -1)
 shape = SubResource("RectangleShape2D_c0a1m")
@@ -37,3 +32,8 @@ shape = SubResource("CapsuleShape2D_kthny")
 [node name="RightLeg_Collision" type="CollisionShape2D" parent="."]
 position = Vector2(15, 13)
 shape = SubResource("CapsuleShape2D_a7coy")
+
+[node name="Desk01" type="Sprite2D" parent="."]
+position = Vector2(0.200001, 8.8)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_4yhom")

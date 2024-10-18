@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxtjaobv72jky"]
+[gd_scene load_steps=9 format=3 uid="uid://bxtjaobv72jky"]
 
 [ext_resource type="Texture2D" uid="uid://bknk4xsqilrdw" path="res://Entities/School_Props/Shoe Cubby/School_Cubby_Front.png" id="1_7sl5e"]
 [ext_resource type="Texture2D" uid="uid://buy53efjellj6" path="res://Entities/School_Props/Shoe Cubby/School_Cubby_Back.png" id="1_fqqid"]
 [ext_resource type="Texture2D" uid="uid://b1ggc1pkwoalv" path="res://Entities/School_Props/Shoe Cubby/School_Cubby_Full01.png" id="3_ku1ih"]
 [ext_resource type="Texture2D" uid="uid://bnq0qaed8hhxk" path="res://Entities/School_Props/Shoe Cubby/School_Cubby_Full02.png" id="4_q7w7x"]
+[ext_resource type="Script" path="res://Entities/School_Props/Shoe Cubby/cubby.gd" id="5_00s30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs7gk"]
 atlas = ExtResource("1_fqqid")
@@ -46,5 +47,5 @@ animations = [{
 [node name="Cubby" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_bs52g")
 animation = &"full_01"
-autoplay = "front"
-frame_progress = 0.7519
+frame_progress = 0.639592
+script = ExtResource("5_00s30")

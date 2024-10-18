@@ -1,4 +1,7 @@
 extends CharacterBody2D
+
+class_name Player
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape_player: CollisionShape2D = $CollisionShape_Player
 @onready var leash_point: Node2D = $Leash_Point
@@ -44,6 +47,8 @@ extends CharacterBody2D
 ###################################################################################################
 
 # Internal variables
+var is_dead = false                      # Is alive?
+
 var speed : float = normal_speed         # Current player speed
 var direction: float = 0.0               # Current input_direction as a float
 var facing_direction: float = 1.0        # Last direction faced (Left or Right | Only updates when directoin is )
@@ -59,7 +64,6 @@ var dash_cooldown_timer: float = 0.0
 var coyote_time: float = 0.0
 var jump_buffer: float = 0.0
 
-
 ###################################################################################################
 
 func _ready():
@@ -70,6 +74,9 @@ func _process(_delta):
 
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+	
 	# Call functions for movement, jumping, timers, pushing
 	move_player(delta)      # Moves the player depending on input
 	gravity_and_jump(delta) # Apply gravity, manage jump input
@@ -141,9 +148,7 @@ func gravity_and_jump(delta):
 	if coyote_time > 0 and jump_buffer > 0:
 		if is_on_ground and plat_vel.x != 0:   # Only works if the x velocity is greate than 1 pixel in either direction
 			# Add platform velocity to jump and lower deceleration to keep momentum
-			print(velocity.x, " + ", plat_vel.x)
 			velocity.x += plat_vel.x
-			print("Jump with compounded velocity: ", velocity.x)
 			deceleration *= 0.175
 			acceleration *= 0.75
 		velocity.y = jump_force
@@ -194,7 +199,18 @@ func halt_movement():
 	velocity = Vector2.ZERO
 	move_and_slide()  # Optional, to make sure it processes the stop immediately
 
+func fall_into_void():
+	print("You Died.")
+	visible = false
+	is_dead = true
+	
+	await get_tree().create_timer(1).timeout
+	reset_player()
 
+func reset_player():
+	global_position = Vector2(0,0)
+	visible = true
+	is_dead = false
 
 
 ## Not Used Limbo State Machine ##

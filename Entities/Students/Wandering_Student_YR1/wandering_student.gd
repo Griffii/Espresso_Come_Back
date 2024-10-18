@@ -17,8 +17,8 @@ func _physics_process(delta: float) -> void:
 
 
 
-func move(dir, speed):
-	velocity.x = dir * speed
+func move(dir, move_speed):
+	velocity.x = dir * move_speed
 	handle_animation()
 	update_flip(dir)
 
