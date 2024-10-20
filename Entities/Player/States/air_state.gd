@@ -1,6 +1,4 @@
-extends State
-
-class_name AirState
+class_name AirState extends State
 
 # Adjustable Variables
 @export var double_jump_velocity : float = -300

@@ -1,11 +1,38 @@
-[gd_resource type="BehaviorTree" load_steps=19 format=3 uid="uid://cc7emwdulfjeb"]
+[gd_resource type="BehaviorTree" load_steps=24 format=3 uid="uid://cc7emwdulfjeb"]
 
 [ext_resource type="Script" path="res://ai/tasks/choose_random_position.gd" id="1_0j8ep"]
 [ext_resource type="Script" path="res://ai/tasks/move_to_position.gd" id="2_xfqns"]
 [ext_resource type="Script" path="res://ai/tasks/find_target.gd" id="3_jk2it"]
 [ext_resource type="Script" path="res://ai/tasks/move_to_target.gd" id="4_sewyn"]
+[ext_resource type="Script" path="res://ai/tasks/move_from_target.gd" id="5_as5jd"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_w1l7l"]
+
+[sub_resource type="BTAction" id="BTAction_mp7br"]
+script = ExtResource("3_jk2it")
+group = &"student_yr1"
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_05xrr"]
+script = ExtResource("4_sewyn")
+target_var = &"target"
+speed_var = 60
+tolerance = 20
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_of5cm"]
+min_duration = 2.0
+max_duration = 6.0
+
+[sub_resource type="BTSequence" id="BTSequence_0f0rr"]
+custom_name = "Idle Sequence"
+children = [SubResource("BTRandomWait_of5cm")]
+
+[sub_resource type="BTSequence" id="BTSequence_3lbvj"]
+custom_name = "Move to Other Student Sequence"
+children = [SubResource("BTAction_mp7br"), SubResource("BTAction_05xrr"), SubResource("BTSequence_0f0rr")]
+
+[sub_resource type="BTProbability" id="BTProbability_p04k4"]
+children = [SubResource("BTSequence_3lbvj")]
 
 [sub_resource type="BTAction" id="BTAction_quwfa"]
 script = ExtResource("1_0j8ep")
@@ -33,38 +60,30 @@ children = [SubResource("BTRandomWait_eoqe6")]
 custom_name = "Random Move Sequence"
 children = [SubResource("BTAction_quwfa"), SubResource("BTAction_8hfc3"), SubResource("BTSequence_ani41")]
 
-[sub_resource type="BTProbability" id="BTProbability_p04k4"]
+[sub_resource type="BTProbability" id="BTProbability_0kx7r"]
 children = [SubResource("BTSequence_c4n28")]
 
-[sub_resource type="BTAction" id="BTAction_mp7br"]
+[sub_resource type="BTAction" id="BTAction_dbxfu"]
 script = ExtResource("3_jk2it")
-group = &"student_yr1"
+group = &"player"
 target_var = &"target"
 
-[sub_resource type="BTAction" id="BTAction_05xrr"]
-script = ExtResource("4_sewyn")
+[sub_resource type="BTAction" id="BTAction_mbb7q"]
+script = ExtResource("5_as5jd")
 target_var = &"target"
-speed_var = 60
-tolerance = 20
+speed_var = 80
+distance_tolerance = 100
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_of5cm"]
-min_duration = 2.0
-max_duration = 6.0
+[sub_resource type="BTSequence" id="BTSequence_xxc6j"]
+custom_name = "Run from Player Sequence"
+children = [SubResource("BTAction_dbxfu"), SubResource("BTAction_mbb7q")]
 
-[sub_resource type="BTSequence" id="BTSequence_0f0rr"]
-custom_name = "Idle Sequence"
-children = [SubResource("BTRandomWait_of5cm")]
-
-[sub_resource type="BTSequence" id="BTSequence_3lbvj"]
-custom_name = "Move to Other Student Sequence"
-children = [SubResource("BTAction_mp7br"), SubResource("BTAction_05xrr"), SubResource("BTSequence_0f0rr")]
-
-[sub_resource type="BTProbability" id="BTProbability_0kx7r"]
+[sub_resource type="BTProbability" id="BTProbability_e3go2"]
 run_chance = 1.0
-children = [SubResource("BTSequence_3lbvj")]
+children = [SubResource("BTSequence_xxc6j")]
 
 [sub_resource type="BTSelector" id="BTSelector_qu587"]
-children = [SubResource("BTProbability_p04k4"), SubResource("BTProbability_0kx7r")]
+children = [SubResource("BTProbability_p04k4"), SubResource("BTProbability_0kx7r"), SubResource("BTProbability_e3go2")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_w1l7l")

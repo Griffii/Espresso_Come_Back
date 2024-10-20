@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://b20r7p25gf8a8"]
+[gd_scene load_steps=33 format=3 uid="uid://b20r7p25gf8a8"]
 
 [ext_resource type="Script" path="res://Entities/Player/hoodie_girl.gd" id="1_8awlb"]
 [ext_resource type="Texture2D" uid="uid://cbpy3aaiiincp" path="res://Entities/Player/Player_SpriteSheet_V4.png" id="2_6k8bn"]
+[ext_resource type="AudioStream" uid="uid://cubwciy33wwrg" path="res://Entities/Player/SFX/Footsteps_Wood_Jump_Start_01.wav" id="3_iv78m"]
 [ext_resource type="Script" path="res://Entities/Player/States/leash_state.gd" id="4_d658a"]
+[ext_resource type="AudioStream" uid="uid://b0lwda068x0se" path="res://Entities/Player/SFX/Footsteps_Wood_Walk_08.wav" id="4_lr8t6"]
 [ext_resource type="Script" path="res://Entities/Player/States/State_Machine.gd" id="4_m0132"]
 [ext_resource type="Script" path="res://Entities/Player/States/ground_state.gd" id="5_ubs6t"]
 [ext_resource type="Script" path="res://Entities/Player/States/air_state.gd" id="6_5nm4s"]
@@ -160,6 +162,25 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/sfx_audiostreamplayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_iv78m")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_iv78m")
+}],
+"times": PackedFloat32Array(0, 0.0001)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_2807e"]
 resource_name = "landing"
@@ -265,6 +286,25 @@ tracks/0/keys = {
 "update": 1,
 "values": [8, 9, 10, 11]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/sfx_audiostreamplayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_lr8t6")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_lr8t6")
+}],
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nhig4"]
 _data = {
@@ -301,6 +341,7 @@ texture = ExtResource("2_6k8bn")
 flip_h = true
 hframes = 7
 vframes = 5
+frame = 11
 
 [node name="Grab_Box" type="Area2D" parent="."]
 position = Vector2(9, -24)
@@ -405,6 +446,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_c555u")
 text = "State:"
 script = ExtResource("8_a8117")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="sfx_audiostreamplayer" type="AudioStreamPlayer" parent="Sounds"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="CharacterStateMachine/Air" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="CharacterStateMachine/Landing" method="_on_animation_player_animation_finished"]

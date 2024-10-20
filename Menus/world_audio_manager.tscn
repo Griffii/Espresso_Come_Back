@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://c02rpw3ch6oc8"]
+
+[ext_resource type="Script" path="res://Menus/world_audio_manager.gd" id="1_2ib8c"]
+[ext_resource type="AudioStream" uid="uid://t6fo68u6il1l" path="res://Assets/ambience/Japan_Suburb_Ambience.mp3" id="1_fh50n"]
+[ext_resource type="AudioStream" uid="uid://djbu4mh0vlwq7" path="res://Assets/music/Kawaii! - Bad Snacks.mp3" id="3_fi8s5"]
+[ext_resource type="AudioStream" uid="uid://bqtufyxkwpd2b" path="res://Assets/music/time_for_adventure.mp3" id="4_vqj4x"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_lvfta"]
+initial_clip = 1
+clip_count = 2
+clip_0/name = &"TutorialMusic"
+clip_0/stream = ExtResource("3_fi8s5")
+clip_0/auto_advance = 0
+clip_1/name = &"MainMenuMusic"
+clip_1/stream = ExtResource("4_vqj4x")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(-1, 0): {
+"fade_beats": 2,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+}
+}
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_kwout"]
+stream_count = 1
+stream_0 = ExtResource("1_fh50n")
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_l2p7l"]
+clip_count = 1
+clip_0/name = &"TutorialAmbience"
+clip_0/stream = SubResource("AudioStreamPlaylist_kwout")
+clip_0/auto_advance = 0
+_transitions = {
+Vector2i(-1, 0): {
+"fade_beats": 1,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="WorldAudioManager" type="Node" node_paths=PackedStringArray("bg_music_player", "bg_ambi_player")]
+script = ExtResource("1_2ib8c")
+bg_music_player = NodePath("BackgroundMusicPlayer")
+bg_ambi_player = NodePath("BackgroundAmbiencePlayer")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_lvfta")
+volume_db = -16.0
+autoplay = true
+bus = &"music"
+
+[node name="BackgroundAmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_l2p7l")
+volume_db = -16.0
+autoplay = true
+bus = &"ambience"

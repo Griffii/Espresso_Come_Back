@@ -145,7 +145,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngald"]
-size = Vector2(124.121, 170.667)
+size = Vector2(108.606, 178.424)
 
 [node name="Cat01" type="CharacterBody2D"]
 collision_layer = 17
@@ -153,13 +153,13 @@ collision_mask = 202
 script = ExtResource("1_8yvv5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(8.75, -8.75)
+position = Vector2(7, -8)
 scale = Vector2(0.0644531, 0.0644531)
 sprite_frames = SubResource("SpriteFrames_pif0m")
 animation = &"idle01"
 autoplay = "idle01"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7, -6.5)
+position = Vector2(5.5, -5.75)
 scale = Vector2(0.0644531, 0.0644531)
 shape = SubResource("RectangleShape2D_ngald")

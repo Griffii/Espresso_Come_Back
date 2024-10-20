@@ -1,6 +1,5 @@
-extends State
+class_name GroundState extends State
 
-class_name GroundState
 
 # State and Animation Names
 @export var air_state : State
@@ -23,6 +22,7 @@ func state_input(event : InputEvent):
 	# Only check when an input event occcurs
 	if event.is_action_pressed("jump"):
 		next_state = air_state
+		animation_player.play(jump_animation)
 	
 	if event.is_action_pressed("left_click"):
 		next_state = leash_state

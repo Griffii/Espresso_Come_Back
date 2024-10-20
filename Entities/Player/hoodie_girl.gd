@@ -1,6 +1,4 @@
-extends CharacterBody2D
-
-class_name Player
+class_name Player extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape_player: CollisionShape2D = $CollisionShape_Player
@@ -10,6 +8,7 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: StateMachine = $CharacterStateMachine
 @onready var grab_box: Area2D = $Grab_Box
+
 
 # Dash Control Variables  ## NOT USED ##
 @export var dash_speed: float = 800.0             # Speed of the dash
@@ -199,19 +198,32 @@ func halt_movement():
 	velocity = Vector2.ZERO
 	move_and_slide()  # Optional, to make sure it processes the stop immediately
 
-func fall_into_void():
+func fall_into_void(spawn_location_node : Node2D):
 	print("You Died.")
-	visible = false
+	var spawn_location = spawn_location_node.position
+	visible = false   # Leave visible if palying an animation
 	is_dead = true
 	
 	await get_tree().create_timer(1).timeout
-	reset_player()
+	reset_player_to(spawn_location)
 
-func reset_player():
-	global_position = Vector2(0,0)
+func reset_player_to(position:Vector2):
+	global_position = position
 	visible = true
 	is_dead = false
 
+#func reset_player():
+	#global_position = Vector2(0,0)
+	#visible = true
+	#is_dead = false
+
+func disable():
+	is_dead = true
+	visible = false
+
+func enable():
+	is_dead = false
+	visible = true
 
 ## Not Used Limbo State Machine ##
 ###### State Machine and Inputs #####
