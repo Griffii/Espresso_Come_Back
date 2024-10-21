@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfb1bflxf8fyy"]
+
+[ext_resource type="Script" path="res://Entities/Teachers/Teacher_1-1/teacher_1_1.gd" id="1_cdoke"]
+[ext_resource type="Texture2D" uid="uid://c4pu8ivytil0m" path="res://Entities/Teachers/Teacher_1-1/Teacher01_StandIn.png" id="1_l8kjb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b6nsa"]
+radius = 9.0
+height = 76.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m431u"]
+size = Vector2(61, 83)
+
+[node name="Teacher" type="CharacterBody2D" groups=["teacher"]]
+collision_layer = 128
+collision_mask = 3
+script = ExtResource("1_cdoke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -38)
+shape = SubResource("CapsuleShape2D_b6nsa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+texture = ExtResource("1_l8kjb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="chat_detection_zone" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_detection_zone"]
+position = Vector2(0.5, -42.5)
+shape = SubResource("RectangleShape2D_m431u")
+
+[node name="chat_bubble_marker" type="Marker2D" parent="."]
+position = Vector2(10, -82)
+gizmo_extents = 5.0
+
+[connection signal="body_entered" from="chat_detection_zone" to="." method="_on_chat_detection_zone_body_entered"]
+[connection signal="body_exited" from="chat_detection_zone" to="." method="_on_chat_detection_zone_body_exited"]

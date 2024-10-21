@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://b20r7p25gf8a8"]
 
 [ext_resource type="Script" path="res://Entities/Player/hoodie_girl.gd" id="1_8awlb"]
-[ext_resource type="Texture2D" uid="uid://cbpy3aaiiincp" path="res://Entities/Player/Player_SpriteSheet_V4.png" id="2_6k8bn"]
+[ext_resource type="Texture2D" uid="uid://cbpy3aaiiincp" path="res://Entities/Player/Art/Player_SpriteSheet_V4.png" id="2_6k8bn"]
 [ext_resource type="AudioStream" uid="uid://cubwciy33wwrg" path="res://Entities/Player/SFX/Footsteps_Wood_Jump_Start_01.wav" id="3_iv78m"]
 [ext_resource type="Script" path="res://Entities/Player/States/leash_state.gd" id="4_d658a"]
 [ext_resource type="AudioStream" uid="uid://b0lwda068x0se" path="res://Entities/Player/SFX/Footsteps_Wood_Walk_08.wav" id="4_lr8t6"]

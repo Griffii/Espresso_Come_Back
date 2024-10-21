@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bhgm1jjuijqbh"]
+[gd_scene load_steps=28 format=4 uid="uid://bhgm1jjuijqbh"]
 
 [ext_resource type="PackedScene" uid="uid://b20r7p25gf8a8" path="res://Entities/Player/hoodie_girl.tscn" id="1_e3hgd"]
 [ext_resource type="Script" path="res://Levels/tutorial_level.gd" id="1_xkqrx"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b31aqoouysyx6" path="res://Entities/School_Props/Broom/broom01.png" id="18_1ueca"]
 [ext_resource type="PackedScene" uid="uid://dopmgn1g4l00s" path="res://Menus/pause_menu.tscn" id="19_84kr0"]
 [ext_resource type="PackedScene" uid="uid://bja0n1kwwvamq" path="res://Entities/Students/Wandering_Student_YR1/wandering_student.tscn" id="20_yeg2j"]
+[ext_resource type="PackedScene" uid="uid://bfb1bflxf8fyy" path="res://Entities/Teachers/Teacher_1-1/teacher_1-1.tscn" id="21_8vvj4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4e5ou"]
 texture = ExtResource("5_1i033")
@@ -890,7 +891,7 @@ collision_mask = 10
 offset = Vector2(0, -50)
 zoom = Vector2(3, 3)
 limit_left = -375
-limit_right = 1200
+limit_right = 1500
 limit_bottom = 250
 position_smoothing_enabled = true
 
@@ -958,6 +959,7 @@ tile_map_data = PackedByteArray("AAD+//j/AAAPAAUAAAD+//n/AAAPAAUAAAD+//r/AAAPAAU
 tile_set = SubResource("TileSet_5xjnn")
 
 [node name="Posters" type="Node2D" parent="Tutorial_World"]
+z_index = -1
 position = Vector2(-122, 18)
 
 [node name="Move_Poster" type="Sprite2D" parent="Tutorial_World/Posters"]
@@ -1087,7 +1089,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("18_1ueca")
 
 [node name="Students" type="Node2D" parent="Tutorial_World"]
-position = Vector2(-57, 0)
+position = Vector2(-927, 8)
 
 [node name="WanderingStudent" parent="Tutorial_World/Students" instance=ExtResource("20_yeg2j")]
 z_index = 1
@@ -1115,6 +1117,10 @@ animation = "girl"
 [node name="WanderingStudent6" parent="Tutorial_World/Students" instance=ExtResource("20_yeg2j")]
 position = Vector2(999, 92)
 animation = "girl"
+
+[node name="Teacher" parent="." instance=ExtResource("21_8vvj4")]
+z_index = -1
+position = Vector2(-32, 98)
 
 [node name="WorldAudioManager" parent="." instance=ExtResource("2_iqeu6")]
 

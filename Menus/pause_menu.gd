@@ -7,7 +7,6 @@ var is_paused: bool = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
-		print("Pause pressed")
 		is_paused = !is_paused
 		visible = is_paused
 		if Engine.time_scale == 1:
@@ -19,7 +18,6 @@ func _process(delta: float) -> void:
 
 
 func _on_play_pressed() -> void:
-	print("Resume pressed.")
 	is_paused = false
 	visible = is_paused
 	Engine.time_scale = 1

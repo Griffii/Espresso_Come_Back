@@ -1,0 +1,29 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"_translation_id": "",
+"color": Color(1, 1, 1, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "BubbleStyle"
+},
+"default_portrait": "Player Portrait",
+"description": "The player character",
+"display_name": "player",
+"mirror": false,
+"nicknames": ["Hoodie Girl"],
+"offset": Vector2(0, 0),
+"portraits": {
+"Player Portrait": {
+"export_overrides": {
+"image": "\"res://Entities/Player/Art/Hoodie_Girl_Portrait.png\""
+},
+"mirror": false,
+"offset": Vector2(0, -155),
+"scale": 0.2,
+"scene": ""
+}
+},
+"scale": 1.0
+}

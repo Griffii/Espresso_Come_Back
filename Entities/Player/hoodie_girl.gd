@@ -63,6 +63,7 @@ var dash_cooldown_timer: float = 0.0
 var coyote_time: float = 0.0
 var jump_buffer: float = 0.0
 
+var is_chatting: bool = false           # Check if player in in dialogue with an npc
 ###################################################################################################
 
 func _ready():
@@ -207,8 +208,8 @@ func fall_into_void(spawn_location_node : Node2D):
 	await get_tree().create_timer(1).timeout
 	reset_player_to(spawn_location)
 
-func reset_player_to(position:Vector2):
-	global_position = position
+func reset_player_to(pos: Vector2):
+	global_position = pos
 	visible = true
 	is_dead = false
 

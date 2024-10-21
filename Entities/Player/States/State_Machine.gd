@@ -1,9 +1,7 @@
-# Generic state machine. Initializes states and delegates engine callbacks
-# (_physics_process, _input) to the active state.
-extends Node
-class_name StateMachine
+class_name StateMachine extends Node
 
-# Emitted when transitioning to a new state. ## Not currently in use but signals might be useful later?
+# Emitted when transitioning to a new state.
+# Not currently in use but signals might be useful later?
 signal transitioned(state_name)
 
 @export var animation_player: AnimationPlayer

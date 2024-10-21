@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func start_transition(animation_name:String):
 	if animation_player == null:
-		print("AnimationPlayer is null.")
+		push_warning("AnimationPlayer is null.")
 		return
 	
 	if !animation_player.has_animation(animation_name):
