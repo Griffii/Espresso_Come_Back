@@ -79,7 +79,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
-self_modulate = Color(1, 1, 1, 0)
 position = Vector2(960, 540)
 scale = Vector2(3, 3)
 texture = ExtResource("2_wnsyp")
@@ -87,12 +86,12 @@ texture = ExtResource("2_wnsyp")
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
 custom_minimum_size = Vector2(720, 0)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = 460.0
-offset_right = 1920.0
-offset_bottom = 510.0
+anchors_preset = -1
+anchor_top = 0.943
+anchor_right = 1.0
+anchor_bottom = 0.989
+offset_top = -0.440002
+offset_bottom = -0.119995
 grow_vertical = 2
 value = 50.0
 show_percentage = false
